@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Manages = require('../models/manages');
+const { check, validationResult } = require('express-validator');
 
 
 router.get('/', function(req, res, next) {
@@ -14,8 +15,24 @@ router.get('/addProduct', function(req, res, next) {
     res.render('addProduct');
 });
 
-router.post('/addProduct', function(req, res, next) {
-        let data = new Manages({
+router.post('/addProduct',[
+    check("name" , "กรุณาป้อนชื่อสินค้า").not().isEmpty(),
+    check("price" , "กรุณาป้อนราคาสินค้า").isFloat({min:0}),
+    check("number" , "กรุณาป้อนจำนวนสินค้า").isInt({min:0}),
+    check("dangerNumber" , "กรุณาป้อนจำนวนที่ใกล้หมด").isInt({min:0}),
+    check("safeNumber" , "กรุณาป้อนจำนวนที่มีอยู่มาก").isInt({min:0})
+], function(req, res, next) {
+    const result = validationResult(req);
+    var errors = result.errors;
+    for(var key in errors){
+        console.log(errors[key].value)
+    }
+    if (!result.isEmpty()) {
+        res.render('addProduct', {
+            errors:errors
+        }) 
+    } else {
+        data = new Manages({
             name:req.body.name,
             price:parseFloat(req.body.price),
             number:parseInt(req.body.number),
@@ -23,11 +40,11 @@ router.post('/addProduct', function(req, res, next) {
             safeNumber:parseInt(req.body.safeNumber)
         })
         Manages.createProduct(data, function(err){
-            if(err) console.log(err)
+            if(err) console.log(err);
             res.redirect("/manages")
         });
     }
-);
+});
 
 router.get('/delete/:id', function(req, res, next) {
     Manages.deleteProduct([req.params.id], function(err){

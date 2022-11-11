@@ -30,27 +30,67 @@
             <div class="container">
                     <form class="" action="/manages/addProduct" method="POST">
                         <div class="form-group">
-                            <label for="">ชื่อสินค้า</label>
+                            <label for="">ชื่อสินค้า</label> 
+                            <div class="" id="error-msg">
+                                <% if(locals.errors) { Object.values(errors).forEach(function(error) {
+                                    if(error.param=='name' ){ %>
+                                    <li id="li" class="alert alert-danger float-right">
+                                        <%= error.msg %>
+                                    </li>
+                                <% } } )}%>
+                            </div>
                             <input type="text" name="name" value="" class="form-control" id="input">
                         </div>
     
                         <div class="form-group">
-                            <label for="">ราคาขาย</label>
+                            <label for="">ราคาขาย (บาท)</label>
+                            <div class="" id="error-msg">
+                                <% if(locals.errors) { Object.values(errors).forEach(function(error) {
+                                    if(error.param=='price' ){ %>
+                                    <li id="li" class="alert alert-danger float-right">
+                                        <%= error.msg %>
+                                    </li>
+                                <% } } )}%>
+                            </div>
                             <input type="text" name="price" value="" class="form-control" id="input">
                         </div>
     
                         <div class="form-group">
-                            <label for="">จำนวน</label>
+                            <label for="">จำนวนสินค้า</label>
+                            <div class=""id="error-msg">
+                                <% if(locals.errors) { Object.values(errors).forEach(function(error) {
+                                    if(error.param=='number' ){ %>
+                                    <li id="li" class="alert alert-danger float-right">
+                                        <%= error.msg %>
+                                    </li>
+                                <% } } )}%>
+                            </div>
                             <input type="text" name="number" value="" class="form-control" id="input">
                         </div>
     
                         <div class="form-group">
-                            <label for="">จำนวนที่อันตราย</label>
+                            <label for="">จำนวนที่ใกล้หมด</label>
+                            <div class="" id="error-msg">
+                                <% if(locals.errors) { Object.values(errors).forEach(function(error) {
+                                    if(error.param=='dangerNumber' ){ %>
+                                    <li id="li" class="alert alert-danger float-right">
+                                        <%= error.msg %>
+                                    </li>
+                                <% } } )}%>
+                            </div>
                             <input type="text" name="dangerNumber" value="" class="form-control" id="input">
                         </div>
     
                         <div class="form-group">
-                            <label for="">จำนวนที่ปลอดภัย</label>
+                            <label for="">จำนวนที่มีอยู่มาก</label>
+                            <div class="" id="error-msg">
+                                <% if(locals.errors) { Object.values(errors).forEach(function(error) {
+                                    if(error.param=='safeNumber' ){ %>
+                                    <li id="li" class="alert alert-danger float-right">
+                                        <%= error.msg %>
+                                    </li>
+                                <% } } )}%>
+                            </div>
                             <input type="text" name="safeNumber" value="" class="form-control" id="input">  
                         </div>
 
