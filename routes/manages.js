@@ -4,7 +4,10 @@ const Manages = require('../models/manages');
 
 
 router.get('/', function(req, res, next) {
-    res.render('manages');
+    Manages.getAllProducts(function(err,manages){
+        if(err) throw err
+        res.render('manages',{data:"Hello Mongoose", manages:manages});
+    })
 });
 
 router.get('/addProduct', function(req, res, next) {
