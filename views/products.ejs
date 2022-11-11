@@ -41,6 +41,35 @@
                             <th id="dnumber">จำนวนที่ใกล้หมด</th>
                             <th id="snumber">จำนวนที่มีอยู่มาก</th>
                         </tr>
+                        <% Object.values(manages).forEach(function(product){ %>
+                            <tr>
+                                <td id="name">
+                                    <%= product.name %>
+                                </td>
+                                <td id="price">
+                                    <%= product.price %>
+                                </td>
+                                <% if(product.number>= product.safeNumber){ %>
+                                    <td id="number" style="color: green">
+                                        <%= product.number %>
+                                    </td>
+                                    <% }else if(product.number>= product.dangerNumber) { %>
+                                        <td id="number" style="color: orange">
+                                            <%= product.number %>
+                                        </td>
+                                        <% }else { %>
+                                            <td id="number" style="color: red">
+                                                <%= product.number %>
+                                            </td>
+                                            <% } %>
+                                <td id="dnumber">
+                                    <%= product.dangerNumber %>
+                                </td>
+                                <td id="snumber">
+                                    <%= product.safeNumber %>
+                                </td>
+                                </tr>
+                            <% }) %>
                     </table>
                 </div>
             </div>
