@@ -29,5 +29,12 @@ router.post('/addProduct', function(req, res, next) {
     }
 );
 
+router.get('/delete/:id', function(req, res, next) {
+    Manages.deleteProduct([req.params.id], function(err){
+        if (err) throw err
+        res.redirect("/manages")
+    })
+});
+
 module.exports = router;
 

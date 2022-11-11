@@ -46,4 +46,8 @@ module.exports.getAllProducts = function(data){
     Manages.find(data)
 }
 
+module.exports.deleteProduct = function(id, callback){
+    Manages.findByIdAndDelete(id, callback)
+}
+
 
