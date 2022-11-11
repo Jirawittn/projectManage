@@ -42,3 +42,8 @@ module.exports.createProduct = function(newProducts, callback){
     newProducts.save(callback)
 }
 
+module.exports.getAllProducts = function(data){
+    Manages.find(data)
+}
+
+
