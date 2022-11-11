@@ -1,7 +1,7 @@
 //ใช้งาน mongoose
 const mongoose = require('mongoose')
 const mongo = require('mongodb')
-// const dbUrl='mongodb://localhost:27017/myProject' ||  process.env.DB_URL
+// const dbUrl='mongodb://localhost:27017/myProjects' ||  process.env.DB_URL
 const dbUrl = 'mongodb+srv://mek:1234@cluster0.zn9r8eb.mongodb.net/?retryWrites=true&w=majority'
 
 
@@ -38,5 +38,7 @@ const manageSchema = new Schema({
 )
 
 const Manages = module.exports = mongoose.model("storages", manageSchema)
-
+module.exports.createProduct = function(newProducts, callback){
+    newProducts.save(callback)
+}
 
