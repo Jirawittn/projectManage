@@ -50,4 +50,7 @@ module.exports.deleteProduct = function(id, callback){
     Manages.findByIdAndDelete(id, callback)
 }
 
+module.exports.saveProduct = function(model, data){
+    model.save(data)
+}
 

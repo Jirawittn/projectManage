@@ -36,5 +36,30 @@ router.get('/delete/:id', function(req, res, next) {
     })
 });
 
+router.post('/edit',(req, res)=> {
+    const edit_id = req.body.edit_id
+    // console.log(edit_id)
+    Manages.findOne({_id:edit_id}).exec((err, data)=>{
+        res.render('edit',{product:data})
+    })
+});
+
+router.post('/update',(req, res)=> {
+    const update_id = req.body.update_id
+        let data = {
+            name:req.body.name,
+            price:parseFloat(req.body.price),
+            number:parseInt(req.body.number),
+            dangerNumber:parseInt(req.body.dangerNumber),
+            safeNumber:parseInt(req.body.safeNumber)
+        }
+            Manages.findByIdAndUpdate(update_id, data).exec(err=> {
+            res.redirect('/manages')
+    })
+    }
+)
+
+
+
 module.exports = router;
 
