@@ -66,7 +66,7 @@ router.post('/update',[
     check("price" , "กรุณาป้อนราคาสินค้า").isFloat({min:0}),
     check("number" , "กรุณาป้อนจำนวนสินค้า").isInt({min:0}),
     check("dangerNumber" , "กรุณาป้อนจำนวนที่ใกล้หมด").isInt({min:0}),
-    check("safeNumber" , "กรุณาป้อนจำนวนที่่ปลอดภัย").isInt({min:0})
+    check("safeNumber" , "กรุณาป้อนจำนวนที่มีอยู่มาก").isInt({min:0})
 ],(req, res)=> {
     const update_id = req.body.update_id
     const result = validationResult(req);
