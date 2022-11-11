@@ -59,7 +59,42 @@ router.post('/update',(req, res)=> {
     }
 )
 
-
+router.post('/updateNumber',(req, res)=> {
+    const update_id = req.body.edit_id
+    const input = parseInt(req.body.number)
+    console.log("รหัส = ", update_id)
+    console.log(input);
+    Manages.getAllProducts(function(err,manage){
+        if(err) throw err
+        Manages.findById(update_id, function (err, docs) {
+            const number = parseInt(docs.number)
+            const button = req.body.operator
+            if (isNaN(input) || input < 0 || (input % 1 != 0) ) {
+                res.render('manages',{ manages:manage});
+            } else {
+                if(button == "plus" ) {
+                    const newNumber = number + input
+                    let data = {
+                        number:parseInt(newNumber)
+                    }
+                    Manages.findByIdAndUpdate(update_id, data).exec(err=> {
+                        res.redirect('/manages')
+                    })
+                    // console.log("Hello plus")
+                }else {
+                    const newNumber = number - input
+                    let data = {
+                        number:parseInt(newNumber)
+                    }
+                    Manages.findByIdAndUpdate(update_id, data).exec(err=> {
+                        res.redirect('/manages')
+                    })
+                    // console.log("Hi minus")
+                }
+            }
+        });
+    })
+})
 
 module.exports = router;
 
